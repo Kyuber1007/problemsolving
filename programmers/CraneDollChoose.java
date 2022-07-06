@@ -36,7 +36,6 @@ class Solution {
   }
 
   public int checkBucketAgain(ArrayList<Integer> bucket, int answer) {
-
     for (int i = 1; i < bucket.size(); i++) {
       if (bucket.get(i) == bucket.get(i - 1)) {
         answer += 2;
