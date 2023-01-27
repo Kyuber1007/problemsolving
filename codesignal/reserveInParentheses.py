@@ -7,3 +7,4 @@ def solution(inputString):
             return solution(inputString[:start] + inputString[start + 1: end][::-1] + inputString[end+1:])
             
     return inputString
+  
