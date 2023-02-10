@@ -10,4 +10,3 @@ def solution(s):
             else:
                 answer += c.lower()
     return answer
-solution("for the  last week")
