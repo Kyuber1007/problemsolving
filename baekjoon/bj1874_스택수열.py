@@ -11,7 +11,6 @@ for i in range(n):
         stack_list.append(cur_num)
         answer.append("+")
         cur_num += 1
-        
     if in_num == stack_list[-1]: 
         stack_list.pop()
         answer.append("-")
