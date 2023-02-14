@@ -1,46 +1,62 @@
+arr = input()
+stack = []
+flag = 1
+count = 0
 
-
-# arr = input()
-# stack = []
-# for i in  arr:
-#     if not stack:
-#         if i in [']', ')']:
-#             print(0)
-#             exit(0)
-
-#     if i == ')':
-#         tem = 0
-#         while stack:
-#             top = stack.pop()
-#             if top =='(':
-#                 if tem == 0:
-#                     stack.append(2)
-#                 else:
-#                     stack.append(tem*2)
-#                 break
-#             elif top == '[':
-#                 print(0)
-#                 exit(0)
-#             else:
-#                 tem += int(top)
-#     elif i == ']':
-#         tem = 0
-#         while stack:
-#             top = stack.pop()
-#             if top =='[':
-#                 if tem == 0:
-#                     stack.append(3)
-#                 else:
-#                     stack.append(tem*3)
-#                 break
-#             elif top == '(':
-#                 print(0)
-#                 exit(0)
-#             else:
-#                 tem += int(top)
-#     else:
-#         stack.append(i)
-# try:
-#     print(sum(stack))
-# except:
-#     print(0)
+for i in arr:
+    if i == ']':
+        tem = 0
+        count -= 1
+        if stack:
+            while stack:
+                top = stack.pop()
+                if top == '[': 
+                    if tem != 0:
+                        stack.append(tem * 3)
+                        break
+                    else: 
+                        stack.append(3)
+                        break
+                elif top == '(':
+                    flag = 0
+                    break
+                else:
+                    tem += int(top)
+        else:
+            flag = 0
+            break
+    elif i == ')':
+        tem = 0
+        count -= 1
+    
+        if stack:
+            while stack:
+                top = stack.pop()
+                if top == '(':
+                    if tem != 0:
+                        stack.append(tem * 2)
+                        break
+                    else: 
+                        stack.append(2)
+                        break
+                elif top == '[':
+                    flag = 0
+                    break
+                else:
+                    tem += int(top)
+        else:
+          flag = 0
+          break
+    else:
+        stack.append(i)
+        count += 1
+    if flag == 0:
+        break
+      
+if flag != 0 and count == 0:
+    answer = 0
+    while stack:
+        answer += int(stack.pop())
+    print(answer)
+else:
+    print(0)
