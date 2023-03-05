@@ -11,7 +11,7 @@ for i in range(N):
     total_people += new_village[1]
 
 villages.sort()
-print(max(villages, key=lambda x: x[1]))
+# print(max(villages, key=lambda x: x[1]))
 
 
 count = 0
