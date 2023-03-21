@@ -5,3 +5,4 @@ M = int(input().strip())
 action = []
 for i in range(M):
     action.append(input())
+
