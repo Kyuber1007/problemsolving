@@ -47,27 +47,3 @@ while True:
         break
     days += 1
 print(days)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
