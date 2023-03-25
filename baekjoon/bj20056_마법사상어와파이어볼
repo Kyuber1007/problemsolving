@@ -1,0 +1,72 @@
+import sys
+input = sys.stdin.readline
+N, M, K = map(int, input().split())
+
+fireballs = []
+for i in range(M):
+    # r, c, m, s, d
+    new_ = list(map(int, input().split()))
+    new_[0] -= 1
+    new_[1] -= 1
+    fireballs.append(new_)
+
+dx = [-1, -1, 0, 1, 1, 1, 0, -1]
+dy = [0, 1, 1, 1, 0, -1, -1, -1]
+
+while K > 0:
+    K -= 1
+    new_fireballs = []
+    visited = [[[] for _ in range(N)] for _ in range(N)]
+    for fireball in fireballs:
+        nx = (dx[fireball[4]] * fireball[3] + fireball[0]) % N
+        ny = (dy[fireball[4]] * fireball[3] + fireball[1]) % N
+        new_fireball = [nx, ny, fireball[2], fireball[3], fireball[4]]        
+        visited[nx][ny].append(new_fireball)
+    
+    for i in range(N):
+        for j in range(N):
+            cur_place = visited[i][j]          
+            # visited가 1개일 때                              
+            if len(cur_place) == 1:
+                new_fireballs.append(visited[i][j][0])
+                
+            # 2개 이상의 파이볼이 있는 칸에서 일어나는 일
+            elif len(cur_place) > 1:
+                mass_sum = 0
+                speed_sum = 0
+                direction_flag = 0
+                count = len(cur_place)
+                # 한 개로 합지는 과정
+                for k in range(count):
+                    mass_sum += cur_place[k][2]
+                    speed_sum += cur_place[k][3]
+                    # 방향을 정하기 위한 flag
+                    if cur_place[k][4] % 2 == 0:
+                        direction_flag += 1
+                    else:
+                        direction_flag -= 1
+                
+                # 질량 계산 소멸 위해서 사용
+                new_mass = mass_sum // 5
+                if new_mass == 0:
+                    continue
+                new_speed = speed_sum // count
+                
+                # 소멸 안될 경우 방향을 정함
+                if direction_flag == count or direction_flag == count * -1:
+                    new_fireballs.append([cur_place[0][0], cur_place[0][1], new_mass, new_speed, 0])
+                    new_fireballs.append([cur_place[0][0], cur_place[0][1], new_mass, new_speed, 2])
+                    new_fireballs.append([cur_place[0][0], cur_place[0][1], new_mass, new_speed, 4])
+                    new_fireballs.append([cur_place[0][0], cur_place[0][1], new_mass, new_speed, 6])
+                else:
+                    new_fireballs.append([cur_place[0][0], cur_place[0][1], new_mass, new_speed, 1])
+                    new_fireballs.append([cur_place[0][0], cur_place[0][1], new_mass, new_speed, 3])
+                    new_fireballs.append([cur_place[0][0], cur_place[0][1], new_mass, new_speed, 5])
+                    new_fireballs.append([cur_place[0][0], cur_place[0][1], new_mass, new_speed, 7])
+            
+
+    fireballs = new_fireballs
+result = 0
+for i in range(len(fireballs)):
+    result += fireballs[i][2]
+print(result)
