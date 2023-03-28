@@ -1,0 +1,21 @@
+import sys
+input = sys.stdin.readline
+
+N, M = map(int, input().split())
+nums = list(map(int, input().split()))
+nums.sort()
+
+
+def dfs(s):
+    if len(s) == M:
+        print(' '.join(str(nums[j]) for j in s))
+        return
+      
+    for i in range(N):
+        s.append(i)
+        dfs(s)
+        s.pop()
+    
+    return
+  
+dfs([])
