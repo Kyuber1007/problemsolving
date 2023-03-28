@@ -1,0 +1,70 @@
+import sys
+from collections import Counter
+
+input = sys.stdin.readline
+r, c, k = map(int, input().split())
+
+grids = []
+for i in range(3):
+    grids.append(list(map(int, input().split())))
+    
+count = 0
+flag = 0
+
+def change_row_col(grids):
+    return list(zip(*grids))
+  
+def generate_new_grids(grids):
+    max_len = 0
+    
+    if len(grids) > 100:
+        tem_grids = []
+        for i in range(100):
+            tem_grids.append(grids[i])
+        grids = tem_grids
+
+    if len(grids[0]) > 100:
+        for i in range(len(grids)):
+            tem_grids.append(grids[i][:100])
+        grids = tem_grids
+    
+    new_grids = []
+    
+    for row in grids:
+        counter = Counter(row)
+        counter_items = list(counter.items())
+        counter_items.sort()
+        counter_items.sort(key=lambda x: x[1])
+        new_row = []
+        for _ in counter_items:
+            if _[0] != 0:
+                new_row.append(_[0])
+                new_row.append(_[1])
+        if max_len < len(new_row):
+            max_len = len(new_row)
+        new_grids.append(new_row)
+            
+    for row in new_grids:
+        while len(row) < max_len:
+            row.append(0)
+    return new_grids
+
+while count < 101:
+    # 길이가 긴지 안긴지 비교하교, 값을 비교하는 logic으로
+    if len(grids) >= r and len(grids[0]) >= c:
+        if grids[r-1][c-1] == k:
+            flag = 1
+            break 
+
+    # 행이 열보다 많거나 같을 때
+    if len(grids) >= len(grids[0]):
+        grids = generate_new_grids(grids)
+        
+    else:
+        grids = change_row_col(generate_new_grids(change_row_col(grids)))
+    count += 1
+
+if flag != 1:
+    print(-1)
+else:
+    print(count)
