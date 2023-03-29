@@ -8,14 +8,13 @@ nums.sort()
 
 def dfs(s):
     if len(s) == M:
-        print(' '.join(str(nums[j]) for j in s))
-        return
+        print(' '.join(str(nums[i]) for i in s))
+        return    
       
     for i in range(N):
         s.append(i)
         dfs(s)
         s.pop()
-    
-    return
+  
   
 dfs([])
