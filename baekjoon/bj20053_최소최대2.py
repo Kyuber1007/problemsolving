@@ -6,13 +6,11 @@ T = int(input().strip())
 for i in range(T):
     N = int(input().strip())
     nums = list(map(int, input().split()))
-    min_, max_ = True,True
-    for j in range(len(nums)):
-        if min_ == True and max_ == True:
-            min_, max_ = nums[j], nums[j]
-        else:
-            if min_ > nums[j]:
-                min_ = nums[j]
-            if max_ < nums[j]: 
-                max_ = nums[j]
+    min_, max_ = nums[0], nums[0]
+    
+    for j in nums:
+        if min_ > j:
+            min_ = j
+        if max_ < j: 
+            max_ = j
     print(min_, max_)
