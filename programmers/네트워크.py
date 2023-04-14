@@ -5,7 +5,7 @@ def solution(n, computers):
     
     for i in range(length):
         next.append(i)
-        tem = []        
+        tem = []
         while len(next) != 0:
             next_index = next.pop()
             for j in range(length):
@@ -16,7 +16,6 @@ def solution(n, computers):
                     tem.append(j)
         if tem != []:
             count += 1
-
     return count
       
-solution(	3, [[1, 1, 0], [1, 1, 0], [0, 0, 1]])
+solution(3, [[1, 1, 0], [1, 1, 0], [0, 0, 1]])

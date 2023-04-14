@@ -9,4 +9,17 @@ def solution(brown, yellow):
     return answer
 
 
-solution(10, 2)
+def solution2(brown, yellow):
+    x = yellow
+    y = 1
+    
+    while x >= y:
+        tem = 2 * (x + y + 2)
+        
+        if tem == brown:
+            return [x + 2, y + 2]
+        
+        y += 1
+        while yellow % y != 0:
+            y += 1
+        x = yellow // y
