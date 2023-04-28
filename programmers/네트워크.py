@@ -1,8 +1,8 @@
 def solution(n, computers):
     count = 0
     length = len(computers)
-    next = []    
-    
+    next = []
+
     for i in range(length):
         next.append(i)
         tem = []
@@ -17,5 +17,6 @@ def solution(n, computers):
         if tem != []:
             count += 1
     return count
-      
+
+
 solution(3, [[1, 1, 0], [1, 1, 0], [0, 0, 1]])
